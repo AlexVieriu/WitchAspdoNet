@@ -1,0 +1,91 @@
+﻿19. Database Project Creation
+
+New Project: Sql Server Data Project (Project that will build the DB)
+
+dbo		-> Store Procedures
+		-> Tables
+Scripts ->
+
+
+20. Table Creation
+
+Tables	-> Food : Id(int), Title(nvarchar(50)), Description(nvarchar(250)), Price(Money)
+		-> Order: Id(int), OrderDate(datetime2), FoodId(int) primaryKey, Quantity(money), Total(money) 
+
+
+21. Post Deploy Script
+
+-> create a script that runs after we deploy to DB : allow us to put some start up values for the tables
+
+right click -> Script... -> Script.PostDeployment.sql
+
+
+if not exists (select * from dbo.Food)
+begin
+    insert into dbo.Food(Title, [Description], Price)
+    values ('Cheeseburger Meal', 'Acheeseburger, fries, and a dring', 5.59),
+    ('Chili Dog Meal', 'Two chili dogs, fries, and a drink', 4.15),
+    ('Vegan Meal', 'A large salad and a water', 1.95)
+end
+
+
+-> this code will run after the DB is created/updated
+
+
+22. Stored Procedure Creation
+
+-> spFood_All.sql
+-> spOrders_GetById.sql
+-> spOrders_Insert.sql
+-> spOrders_UpdateName.sql
+-> spOrders_Delete.sql
+
+
+23. Publishing the Database
+
+
+24. Class Library Creation
+
+-> Class Library Standard 2.1
+
+
+25. Adding the NuGet Packages
+
+<ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.78" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+</ItemGroup>
+
+Dapper                  : https://github.com/StackExchange/Dapper
+Data.SqlClient          : https://github.com/dotnet/SqlClient
+Extensions.Configuration: https://github.com/dotnet/runtime
+
+
+26. Creating the SQL Database Code
+
+Db -> SqlDb.cs
+
+Dictionary: 
+
+-> .GetConnectionString:
+
+_config.GetConnectionString(connectionStringName): get the all ConnectionString by supplying the Name of the Connection
+
+"ConnectionStrings": {
+    "DefaultConnection": "Server=DESKTOP-ID14ULT;Database=BookStore_V2;Trusted_Connection=True;"
+
+
+-> .QueryAsync: 
+
+Execute a query asynchronously using Task
+Returns a sequence of data of T; if a basic type (int, string, etc) is queried then the
+data from the first column in assumed, otherwise an instance is created per row,
+and a direct column-name===member-name mapping is assumed (case insensitive).
+
+-> .ExecuteAsync:
+
+Return the number of rows affected
+
+
+27. Creating Data Classes
