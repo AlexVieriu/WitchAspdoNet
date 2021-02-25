@@ -1,0 +1,76 @@
+﻿33. Configuring the Dependency Injection
+
+-- Startup.cs --
+
+services.AddSingleton(new ConnectionStringData
+{
+    SqlConnectionName = "Default"
+});
+
+services.AddSingleton<ISqlDb, SqlDb>();
+services.AddSingleton<IFoodData, FoodData>();
+services.AddSingleton<IOrderData, OrderData>();
+
+
+34. Adding the Connection String
+
+Data Source=ALEXVIERIU\VIERIUALEXANDRU;Initial Catalog=TimsDinerDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
+
+Data Source             =ALEXVIERIU\VIERIUALEXANDRU;        -> Server
+Initial Catalog         =TimsDinerDB;                       -> DataBase
+Integrated Security     =True;                              -> Use the LogIn user
+Connect Timeout         =30;                                
+Encrypt                 =False;
+TrustServerCertificate  =False;
+ApplicationIntent       =ReadWrite;
+MultiSubnetFailover     =False
+
+
+35. Routing
+
+
+36. Creating Data
+
+MVVM : ModelView -> View -> Model
+
+Create.cshtml.cs    : ModelView
+Create.cshtml       : View 
+CreateModel         : Model
+
+MVC : one way binding
+MVVM: two way binding (user interface has access/write to FoodItems, Order)
+        -> the UI can write to CodeBehind
+        -> the CodeBehind ca write to UI
+
+
+-- Create.cshtml.cs --
+
+public List<SelectListItem> FoodItems { get; set; }
+
+ctor(IFoodData, IOrderOdata){...}
+
+public async Task OnGet()
+{
+    -> get the list of Food
+    -> put the values, text intro the SelectListItem(dropdown list)
+}
+
+
+-- Create.cshtml.cs --
+
+asp-validation-summary
+asp-for                 : know what type is the field
+asp-validation-for
+asp-items
+
+
+ex: <input asp-for="Order.OrderName" class="form-control" />    -->> <input type="text" />        
+    <input asp-for="Order.Quatity" class="form-control"/>       -->> <input type="number" /> 
+    
+-> client side validation
+
+@section Scripts { 
+    @{ 
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

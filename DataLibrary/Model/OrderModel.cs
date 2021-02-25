@@ -20,8 +20,8 @@ namespace DataLibrary.Model
         public int FoodId { get; set; }
 
         [Required]
-        [Range(1,10,ErrorMessage ="You can select up to 10 meals")]
-        public int Quatity { get; set; }
+        [Range(1,10,ErrorMessage ="You can select between 1 and 10 meals")]
+        public int Quantity { get; set; }
 
         public decimal Total { get; set; }
     }

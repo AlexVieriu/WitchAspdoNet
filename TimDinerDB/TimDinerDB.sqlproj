@@ -61,4 +61,16 @@
     <Folder Include="dbo\Stored Procedures" />
     <Folder Include="dbo\Tables" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Stored Procedures\spFood_All.sql" />
+    <Build Include="dbo\Stored Procedures\spOrders_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\spOrders_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\spOrders_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spOrders_UpdateName.sql" />
+    <Build Include="dbo\Tables\Food.sql" />
+    <Build Include="dbo\Tables\Order.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
+  </ItemGroup>
 </Project>

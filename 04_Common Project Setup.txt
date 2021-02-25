@@ -90,3 +90,25 @@ Return the number of rows affected
 
 27. Creating Data Classes
 
+Data    -> FoodData.cs , IFoodData.cs        
+        -> OrderData.cs, IOrderData.cs
+
+IFoodData   : 
+
+Task<List<FoodModel>> GetFood();
+
+
+IOrderData  : 
+
+Task<int> CreareOrder(OrderModel order);
+Task<int> DeleteOrder(int orderId);
+Task<OrderModel> GetOderById(int orderId);
+Task<int> UpdateOrderName(int orderId, string orderName);
+
+
+28. Exporting the DLL
+
+Change from "Debug" to "Release" mode and build the project
+-> this will create a DLL that can be used for the other projects
+
+C:\Users\alexandru.vieriu\Desktop\WitchAspdoNetCore\DataLibrary\bin\Release\netstandard2.1

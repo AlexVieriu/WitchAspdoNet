@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataLibrary.Db
 {
-    public class SqlDb
+    public class SqlDb : ISqlDb
     {
         private readonly IConfiguration _config;
 
@@ -46,8 +46,7 @@ namespace DataLibrary.Db
                                                      parameters,
                                                      commandType: CommandType.StoredProcedure);
             }
-
-
+                
         }
     }
 }

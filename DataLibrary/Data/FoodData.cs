@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DataLibrary.Data
 {
-    public class FoodData 
+    public class FoodData : IFoodData
     {
         private readonly ISqlDb _db;
         private readonly ConnectionStringData _connectionString;
@@ -20,7 +20,7 @@ namespace DataLibrary.Data
         {
             return _db.LoadData<FoodModel, dynamic>("dbo.SpFood_All",
                                                     new { },
-                                                    _connectionString.ConnectionName);
+                                                    _connectionString.SqlConnectionName);
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public class ConnectionStringData 
     {
-        public string ConnectionName { get; set; } = "Default";
+        public string SqlConnectionName { get; set; } = "Default";
     }
 }
