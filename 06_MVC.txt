@@ -1,0 +1,12 @@
+﻿45. Configuring Dependency Injection
+
+-- Startup.cs --
+
+-> add DI :
+	-> ConnectionString
+	-> ISql, IFoodData, IOrderData
+
+
+46. Adding the Connection String
+
+47. Routing
