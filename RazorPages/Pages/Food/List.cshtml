@@ -1,0 +1,31 @@
+﻿@page
+
+@model ListModel
+
+@if (Model is null && Model.FoodList is null && Model.FoodList.Count <= 0)
+{
+    <h4>There are no List of Food</h4>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+
+        <tbody class="thead-light">
+            @foreach (var food in Model.FoodList)
+            {
+                <tr>
+                    <td>@food.Title</td>
+                    <td>@food.Description</td>
+                    <td>@food.Price.ToString("c")</td>
+                </tr>
+            }
+        </tbody>
+    </table>  
+}

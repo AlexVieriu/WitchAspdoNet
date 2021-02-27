@@ -1,13 +1,10 @@
 ﻿CREATE PROCEDURE [dbo].[spOrders_Delete]
 	@Id int
-	
 AS
-begin
-	
-	set nocount on;
+begin 
 
-	delete 
-	from dbo.[Order]
-	where Id = @Id;
+	Delete
+	From [Order]
+	where Id = @Id
 
 end

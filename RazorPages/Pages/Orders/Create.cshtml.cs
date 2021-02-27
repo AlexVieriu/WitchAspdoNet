@@ -1,5 +1,4 @@
 ﻿using DataLibrary.Data;
-using DataLibrary.Db;
 using DataLibrary.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -54,7 +53,7 @@ namespace RazorPages.Pages.Orders
 
             int id = await _orderData.CreareOrder(Order);
 
-            return RedirectToPage("./Create");
+            return RedirectToPage("./Display", new { Id = id});
         }
     }
 }

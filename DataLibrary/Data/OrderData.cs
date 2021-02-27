@@ -36,14 +36,14 @@ namespace DataLibrary.Data
 
         public Task<int> UpdateOrderName(int orderId, string orderName)
         {
-            return _db.SaveData("dbo.spOrders_Update",
+            return _db.SaveData("dbo.spOrders_UpdateName",
                                 new { Id = orderId, orderName = orderName },
                                 _connectionString.SqlConnectionName);
         }
 
         public Task<int> DeleteOrder(int orderId)
         {
-            return _db.SaveData("dbo.spOrders_Update",
+            return _db.SaveData("dbo.spOrders_Delete",
                                 new { Id = orderId },
                                 _connectionString.SqlConnectionName);
         }

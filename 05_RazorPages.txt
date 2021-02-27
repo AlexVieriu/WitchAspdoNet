@@ -74,3 +74,88 @@ ex: <input asp-for="Order.OrderName" class="form-control" />    -->> <input type
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+
+37. Reading Data
+
+-- Diplay.cshtml.cs --
+
+Properties  : int Id, OrderModel Order, string ItemPurchased
+Methods     : async Task<IActionResult> OnGet() 
+            {
+                -> GetOderById                
+                -> GetFood, get the Title
+                -> return Page();
+            }
+
+
+-> change property on a Get not just a Post
+
+[BindProperty(SupportsGet = true)]
+public int Id { get; set; }
+
+
+-- Display.cshtml --
+
+-> Model.Order is null { ... }
+-> create a table : Order Name, Order Date, Order Total, Item Ordered, Quantity
+
+
+-- List.cshtml.cs --
+
+-> ctor(IFoodModel)
+-> List<FoodModel> FoodList
+-> OnGet() 
+{ 
+    -> get the list of foods 
+}
+
+
+-- List.cshtml
+
+-> create a table for FoodList
+
+
+38. Updating Data
+
+-> do not use the some Model for different purpose (ex: OrderModel, OrderUpdateModel)
+
+
+-- Models -> OrderUpdateModel.cs --
+
+-> Id, OrderName
+
+
+-- Display.cshtml.cs --
+
+-> create and bind the Updatemodel
+-> OnPost()
+    -> check if the Model is valid
+    -> UpdateOrderName(UpdateModel.Id, UpdateModel.OrderName);
+
+
+-- Display.cshtml -- 
+-> create a <form method= "post">
+
+
+39. Deleting Data
+
+-- Delete.cshtml.cs --
+
+Properties  : int Id, OrderModel Order
+Methods     : OnGet()   
+                -> GetOderById(Id);
+              OnPost()
+                -> DeleteOrder(Id);
+                -> RedirectToPage("./Create");
+
+-- Delete.cshtml
+
+-> check if the Model is null
+
+<form method="post">
+    <input asp-for="Id" value="@Model.Id" type="hidden"/>
+    <div class="form-group">
+        <input type="submit" value="Delete Order" class="btn btn-danger"/>
+    </div>
+</form>

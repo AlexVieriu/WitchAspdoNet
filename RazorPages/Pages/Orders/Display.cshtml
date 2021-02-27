@@ -1,0 +1,68 @@
+﻿@page
+
+@model DisplayModel
+
+@{
+    ViewData["Title"] = "Display";
+}
+
+@if (Model.Order is null)
+{
+    <h5>The requested record was not found.</h5>
+}
+else
+{
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Order Name</th>
+                <th>Order Date</th>
+                <th>Order Total</th>
+                <th>Item Ordered</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+
+        <tbody class="thead-light">
+            <tr>
+                <td>@Model.Order.OrderName</td>
+                <td>@Model.Order.OrderDate</td>
+                <td>@Model.Order.Total.ToString("c")</td>
+                <td>@Model.ItemPurchased</td>
+                <td>@Model.Order.Quantity</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="col">
+        <div class="row">
+            <a asp-page="./Delete" asp-route-id="@Model.Order.Id" class="btn btn-danger">Delete Order</a>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="UpdateModel.Id" value="@Model.Order.Id" type="hidden" />
+        <div class="form-group">
+            <label asp-for="UpdateModel.OrderName" class="control-label"></label>
+            <input asp-for="UpdateModel.OrderName" value="@Model.Order.OrderName" class="form-control" />
+            <span asp-validation-for="UpdateModel.OrderName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Update Order Name" class="btn btn-primary">
+        </div>
+
+    </form>
+
+}
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
