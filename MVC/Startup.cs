@@ -2,9 +2,14 @@ using DataLibrary.Data;
 using DataLibrary.Db;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MVC
 {
@@ -22,10 +27,7 @@ namespace MVC
         {
             services.AddControllersWithViews();
 
-            services.AddSingleton(new ConnectionStringData()
-            {
-                SqlConnectionName = "Default"
-            }); 
+            services.AddSingleton(new ConnectionStringData() { SqlConnectionName = "Default" });
 
             services.AddSingleton<ISqlDb, SqlDb>();
             services.AddSingleton<IFoodData, FoodData>();

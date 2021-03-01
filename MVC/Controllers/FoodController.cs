@@ -1,0 +1,23 @@
+﻿using DataLibrary.Data;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
+namespace MVC.Controllers
+{
+    public class FoodController : Controller
+    {
+        private readonly IFoodData _foodData;
+
+        public FoodController(IFoodData foodData)
+        {
+            _foodData = foodData;
+        }        
+
+        public async Task<IActionResult> Display()
+        {
+            var food = await _foodData.GetFood();
+
+            return View(food);
+        }
+    }
+}

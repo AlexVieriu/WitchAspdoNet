@@ -8,7 +8,7 @@ begin
 	set nocount on;
 	
 	update dbo.[Order]
-	set OrderDate = @OrderName
+	set OrderName = @OrderName
 	where Id = @Id;
 
 end

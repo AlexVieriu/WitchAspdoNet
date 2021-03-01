@@ -10,3 +10,58 @@
 46. Adding the Connection String
 
 47. Routing
+
+48. Creating Data
+
+Controller	: OrdersController.cs
+
+				-> Create()
+					-> get the list of foods
+					-> create new object OrderCreateModel
+					-> add the foods to the SelectListItem
+					-> return the View with the model;
+
+				-> Create(OrderModel model)
+					-> get the list of food
+					-> update the total = quantity * price(use LINQ to get the food price for our order);
+					-> CreareOrder(order)
+					-> return to "Create" page
+
+Model		: OrderCreateModel(Order, List<SelectListItem>)
+
+View		: Create.cshtml
+				-> OrderName, FoodId, Quantity
+				-> tag helpers: asp-action, asp-validation-summary, asp-for, sp-validation-for
+				-> <div>, <form>, <label>, <input>, <select>, <span>
+
+
+49. Reading Data 
+
+Controllers	: FoodController.cs
+				-> Display
+					-> GetAllFood();
+					-> return View(model);
+
+Views		: Display.cshtml
+				-> check if the Model is null or count <= 0
+				-> create table and display the list of foods using HTML helpers
+
+
+50. Updating Data
+
+-- Display.cshtml --
+
+-> create form with asp-action="Update"
+	-> make a <input> id hidden 
+	-> make a <label>, <input> for OrderName so we can send model back
+
+
+-- OrdersController.cs --
+
+[HttpPost]
+-> Update 
+	-> .UpdateOrderName(id, orderName);
+	-> RedirectToAction("Display", new { id });
+
+
+51. Deleting Data

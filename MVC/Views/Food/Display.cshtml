@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DataLibrary.Model.FoodModel>
+
+<h2>Display</h2>
+
+@if (Model is null && Model.Count() <= 0)
+{
+    <h5>No list of food is in our Database</h5>
+}
+
+else
+{
+    <table class="table table-striped">
+        
+        <thead class="thead-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>@Html.DisplayNameFor(model => model.Description)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var food in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelitem => food.Id)</td>
+                    <td>@Html.DisplayFor(modelitem => food.Title)</td>
+                    <td>@Html.DisplayFor(modelitem => food.Description)</td>
+                    <td>@Html.DisplayFor(modelitem => food.Price)</td>                    
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
