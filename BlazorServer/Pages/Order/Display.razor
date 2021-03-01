@@ -1,0 +1,32 @@
+﻿@page "/Order/Display/{Id:int}"
+
+@inject IFoodData foodData
+@inject IOrderData orderData
+
+@if (order is null)
+{
+    <h5>Record loding..</h5>
+}
+else
+{
+    <table></table>
+}
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    private OrderModel order;
+    private string ItemPurchased;
+
+    protected override async Task OnInitializedAsync()
+    {
+        order = await orderData.GetOderById(Id);
+
+        if (order != null)
+        {
+            var food = await foodData.GetFood();
+            ItemPurchased = food.Where(x => x.Id == order.FoodId).FirstOrDefault()?.Title;
+        }
+    }
+}
