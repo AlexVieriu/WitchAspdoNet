@@ -65,3 +65,37 @@ Views		: Display.cshtml
 
 
 51. Deleting Data
+
+-> asp-action="Delete" -> the program knows that method is a HtppPost 
+
+<form asp-action="Delete">
+    <input type="submit" value="Delete" class="btn btn-danger" />
+</form>
+
+
+-- OrdersController.cs --
+
+[HttpGet]
+Delete (int id)
+-> get the order by Id
+-> return the View(model)
+
+[HttpPost]
+Delete (OrderModel order)
+-> check if model is null
+-> .DeleteOrder
+-> return to Create page
+
+!!! it need to be in form so can be read as a HttpPost
+
+
+-- Delete.cshtml --
+
+-> we can display whatever we want from the model because we have HttpGet and we return the model to the View
+Return View(model);
+-> asp-action = "Delete": writes back to the controller
+	
+	
+
+
+

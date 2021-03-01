@@ -1,0 +1,19 @@
+﻿70. Configuring Dependency Injection
+
+
+71. Routing
+
+endpoints.MapBlazorHub();               // configure SignalR
+endpoints.MapFallbackToPage("/_Host");  // if you don't knwo where to go, go to _Host
+
+
+72. Adding the Connection String
+
+"Default": "Server = ALEXVIERIU\\VIERIUALEXANDRU; Database = TimdinerDb; Trusted_Connection = True"
+
+
+73. Creating Data
+
+<InputSelect>: 
+https://www.pragimtech.com/blog/blazor/blazor-select-bind-database-data/
+https://www.meziantou.net/creating-a-inputselect-component-for-enumerations-in-blazor.htm

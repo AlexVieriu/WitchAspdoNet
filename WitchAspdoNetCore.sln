@@ -10,13 +10,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{C1B5CDF5
 		04_Common Project Setup.txt = 04_Common Project Setup.txt
 		05_RazorPages.txt = 05_RazorPages.txt
 		06_MVC.txt = 06_MVC.txt
+		07_API.txt = 07_API.txt
+		08_BlazorServer.txt = 08_BlazorServer.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLibrary", "DataLibrary\DataLibrary.csproj", "{B24C01F7-6D4A-4093-A15B-AEB6BF957251}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPages", "RazorPages\RazorPages.csproj", "{03CE6CCA-5C31-4D92-AFC4-D54E29C628CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "MVC\MVC.csproj", "{6EF00BF5-923F-49F5-AA79-5362DC32847C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC", "MVC\MVC.csproj", "{6EF00BF5-923F-49F5-AA79-5362DC32847C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{B980E26C-7530-404C-890C-62918536F989}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServer", "BlazorServer\BlazorServer.csproj", "{A64A5793-4A3F-4B32-947D-F5FF15F4C762}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +46,14 @@ Global
 		{6EF00BF5-923F-49F5-AA79-5362DC32847C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EF00BF5-923F-49F5-AA79-5362DC32847C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EF00BF5-923F-49F5-AA79-5362DC32847C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B980E26C-7530-404C-890C-62918536F989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B980E26C-7530-404C-890C-62918536F989}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B980E26C-7530-404C-890C-62918536F989}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B980E26C-7530-404C-890C-62918536F989}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A64A5793-4A3F-4B32-947D-F5FF15F4C762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A64A5793-4A3F-4B32-947D-F5FF15F4C762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A64A5793-4A3F-4B32-947D-F5FF15F4C762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A64A5793-4A3F-4B32-947D-F5FF15F4C762}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

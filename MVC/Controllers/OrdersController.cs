@@ -78,7 +78,7 @@ namespace MVC.Controllers
             return RedirectToAction("Display", new { id });
         }
 
-
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             var order = await _orderData.GetOderById(id);

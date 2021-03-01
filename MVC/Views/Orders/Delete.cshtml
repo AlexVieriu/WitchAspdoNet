@@ -2,7 +2,18 @@
 
 <h2>Delete</h2>
 
-<form>
-    <input />
+@if (Model is null)
+{
+    <h3>The requested record was not found</h3>
+}
 
-</form>
+else
+{
+    <div class="h5">
+        Are you sure you want to delete the order you place on @Model.OrderDate ?
+    </div>
+
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </form>
+}

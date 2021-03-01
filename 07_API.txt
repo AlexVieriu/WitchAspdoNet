@@ -1,0 +1,94 @@
+﻿57. Configuring Dependency Injection
+
+58. Adding the Connection String
+
+59. Routing
+
+60. Creating Data
+
+-- Services -> ValidateModelAttribute.cs --
+
+public override void OnActionExecuted(ActionExecutedContext context)
+{
+    if (context.ModelState.IsValid == false)
+    {
+        context.Result = new BadRequestObjectResult(context.ModelState);
+    }
+}
+
+-- Controllers -> OrderController.cs -- 
+
+[HttpPost]
+status code 200
+status code 400
+-> Create(OrderModel order)
+    -> get the list of Food
+    -> calculate the Total
+    -> .Create(order)
+    -> return StatusCode Ok() with the Id in a new object
+
+-> if we us <IActionResult> we can return StatusCodes
+-> Defines a contract that represents the result of an action method
+
+
+61. Reading Data
+
+-- OrderController.cs- 
+
+[HttpGet("{id:int}")]
+status code 200
+status code 400
+-> GetOrderbyId(int id)
+    -> .GetOrderById(id);
+    -> return status code OK() with the order object
+
+
+-- FoodController.cs -- 
+
+[HttpGet]
+status code 200
+status code 400
+-> GetAllFood()
+    -> .GetFood();
+    -> return Ok() with all the foods list;
+
+
+62. Update Data
+
+-- Model -> OrderModel.cs --
+
+-> properties : Id, OrderName
+
+
+63. Delete Data
+
+[HttpDelete]
+-> Delete(int id)
+    -> DeleteOrder(id);
+    -> return NoContent();
+
+
+65. Enabling CORS
+
+-> is a way that APIs will tell the world how will talk to
+-> enable CORS to talk to anyone
+
+-- Startup.cs --
+
+ConfigureServices :
+
+-> we can name the policy whatever we want ("AllowOrigins")
+
+services.AddCors(options =>
+{
+options.AddPolicy("AllowOrigins", builder => builder.AllowAnyOrigin()
+                                                    .AllowAnyHeader()
+                                                    .AllowAnyMethod());
+});
+
+
+Configure: 
+
+app.UseCors("AllowOrigins");
+
+

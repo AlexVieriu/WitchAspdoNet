@@ -26,7 +26,11 @@ else
                 <td>@Model.Order.Total.ToString("c")</td>
             </tr>
         </tbody>
-    </table>
+    </table>  
+
+    <div>
+        <a asp-action="Delete" asp-route-id="@Model.Order.Id" class="btn btn-danger">Delete Order</a>
+    </div>
 
     <br />
 
