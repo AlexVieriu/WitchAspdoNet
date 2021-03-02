@@ -14,6 +14,110 @@ endpoints.MapFallbackToPage("/_Host");  // if you don't knwo where to go, go to 
 
 73. Creating Data
 
+UI:
+-> create a <EditForm>
+	-> create a DropDownList : foodItems
+	-> <InputNumber>
+	-> <InputText>
+	-> create a Button
+
+@code:
+-> create a OrderModel object
+-> create a List<Foodmodel>
+-> OnInitializedAsync():
+	-> get food list
+-> FoodItemchange	: change the Id when we select a Item from the List
+-> OnCreateOrder	: create the order
+					  redirect to the Display page with that order Id
+
+
+74. Reading Data
+-- DisplayOrder.razor --
+
+UI:
+-> create a table : OrderName, OrderDate, Total, ItemPurchased, Quantity
+
+
+@code:
+-> create a Route parameter Id
+-> Order object
+-> string ItemPurchased
+-> OnInitializedAsync()
+	-> get the Order using the Id
+	-> get all the food items
+	-> initialize the ItemPurchased
+
+
+-- DisplayFood.razor --
+
+UI:
+-> Id, Title, Description, Price
+
+@code:
+-> create a List of FoodModel
+-> OnInitializedAsync()
+	-> get the food
+
+
+Dictionary: 
+
+Price Format: https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings
+
 <InputSelect>: 
 https://www.pragimtech.com/blog/blazor/blazor-select-bind-database-data/
 https://www.meziantou.net/creating-a-inputselect-component-for-enumerations-in-blazor.htm
+
+
+75. Updating Data
+
+UI:
+-> create a <EditForm>
+	-> <label>, <InputText>, <ValidationMessage For=...>
+	-> button : <input />
+
+@code:
+-> create a UpdateOrderModel object and instantiated it 
+
+-> OnInitializedAsync()
+	-> orderUpdate.Id = order.Id;
+       orderUpdate.OrderName = order.OrderName;
+
+-> OnUpdateSubmit()
+	-> .UpdateOrderName
+	->	order.OrderName = orderUpdate.OrderName;
+
+
+76. Deleting Data
+
+UI:
+<tr>
+    <td colspan="2">
+        @if (confimDelete)
+        {
+            <button class=" btn btn-outline-danger" @onclick="HandleDeleteRecord">
+                Confirm Delete
+            </button>
+            <button class=" btn btn-secondary" @onclick="(()=> confimDelete = false)">
+                Cancel
+            </button>
+        }
+        else
+        {
+            <button class=" btn btn-danger" @onclick="(()=> confimDelete = true)">
+                Delete Order
+            </button>
+        }
+    </td>
+</tr>
+
+
+@code:
+private bool confimDelete = false;
+private bool recordNotFound = false;
+
+private async Task HandleDeleteRecord()
+{
+    await orderData.DeleteOrder(Id);
+
+    navManager.NavigateTo("/food/display");
+}

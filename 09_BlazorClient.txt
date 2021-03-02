@@ -1,0 +1,34 @@
+﻿81. Add NuGet Package
+
+Microsoft.AspNetCore.Blazor.HttpClient
+
+
+82. Configuring Dependency Injection
+
+
+83. Routing
+
+-- App.razor --
+
+-> delete sample-data
+
+<Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p>Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
+<Router>    : enables routing to Razor components in a Blazor app (AppAssembly)
+<Found>     : 
+<RouteView> :
+
+https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-5.0
+https://www.c-sharpcorner.com/article/routing-in-blazor/
+
+
+84. Creating Data 

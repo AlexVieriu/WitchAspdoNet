@@ -3,10 +3,12 @@
 @inject IFoodData foodData
 @inject IOrderData orderData
 
+@inject NavigationManager navManager 
+
 <h2>Create Order</h2>
 
 
-<EditForm Model="@order" OnValidSubmit="CreateOrder">
+<EditForm Model="@order" OnValidSubmit="OnCreateOrder">
     <DataAnnotationsValidator />
     <ValidationSummary Model="@order" />
 
@@ -34,7 +36,7 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Order Food" class="btn btn-primary" />
+        <input type="submit" value="Order Food" class="btn btn-primary" @onclick="OnCreateOrder"/>
     </div>
 </EditForm>
 
@@ -61,12 +63,12 @@
         }
     }
 
-    private async Task CreateOrder()
+    private async Task OnCreateOrder()
     {
         order.Total = order.Quantity * foodItems.Where(x => x.Id == order.FoodId).First().Price;
 
         int id = await orderData.CreareOrder(order);
 
-        order = new OrderModel();
+        navManager.NavigateTo($"/Order/Display/{id}");
     }
 }

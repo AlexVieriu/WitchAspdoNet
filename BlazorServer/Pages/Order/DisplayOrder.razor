@@ -1,0 +1,128 @@
+﻿@page "/Order/Display/{Id:int}"
+
+@inject IFoodData foodData
+@inject IOrderData orderData
+
+@inject NavigationManager navManager
+
+@if (order is null)
+{
+
+    <h5>Record loding..</h5>
+}
+
+else if (recordNotFound)
+{
+    <h5>Record Not Found</h5>
+}
+
+else
+{
+    <table class="table table-striped col-8">
+        <tbody>
+            <tr>
+                <td><b>Order Name</b></td>
+                <td>@order.OrderName</td>
+            </tr>
+            <tr>
+                <td><b>Order Date</b></td>
+                <td>@order.OrderDate</td>
+            </tr>
+            <tr>
+                <td><b>Order Total</b></td>
+                <td>@order.Total.ToString("c")</td>
+            </tr>
+            <tr>
+                <td><b>Item Ordered</b></td>
+                <td>@ItemPurchased</td>
+            </tr>
+            <tr>
+                <td><b>Quantity Ordered</b></td>
+                <td>@order.Quantity</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @if (confimDelete)
+                    {
+                        <button class=" btn btn-outline-danger" @onclick="HandleDeleteRecord">
+                            Confirm Delete
+                        </button>
+                        <button class=" btn btn-secondary" @onclick="(()=> confimDelete = false)">
+                            Cancel
+                        </button>
+                    }
+                    else
+                    {
+                        <button class=" btn btn-danger" @onclick="(()=> confimDelete = true)">
+                            Delete Order
+                        </button>
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <br />
+
+    <EditForm Model="orderUpdate" OnValidSubmit="OnUpdateSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group col-6">
+            <label for="ordername">Order Name</label>
+            <InputText id="ordername" class="form-control" @bind-Value="orderUpdate.OrderName" />
+            <ValidationMessage For="@(()=> orderUpdate.OrderName)" class="text-danger" />
+        </div>
+
+        <div class="form-group col-6">
+            <input type="submit" value="Update Order Name" class="btn btn-primary" />
+        </div>
+    </EditForm>
+
+}
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    private OrderModel order;
+    private string ItemPurchased;
+    private bool confimDelete = false;
+    private bool recordNotFound = false;
+    private OrderUpdateModel orderUpdate = new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        order = await orderData.GetOderById(Id);
+
+        if (order != null)
+        {
+            var food = await foodData.GetFood();
+            ItemPurchased = food.Where(x => x.Id == order.FoodId).FirstOrDefault()?.Title;
+
+            orderUpdate.Id = order.Id;
+            orderUpdate.OrderName = order.OrderName;
+        }
+        else
+        {
+            recordNotFound = true;
+        }
+    }
+
+    private async Task OnUpdateSubmit()
+    {
+        await orderData.UpdateOrderName(orderUpdate.Id, orderUpdate.OrderName);
+        order.OrderName = orderUpdate.OrderName;
+    }
+
+
+    private async Task HandleDeleteRecord()
+    {
+        await orderData.DeleteOrder(Id);
+
+        navManager.NavigateTo("/food/display");
+    }
+}
