@@ -22,6 +22,15 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigins", builder => builder.AllowAnyOrigin()
+                                                                    .AllowAnyHeader()
+                                                                    .AllowAnyMethod());
+            });
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -32,12 +41,7 @@ namespace API
             services.AddSingleton<IFoodData, FoodData>();
             services.AddSingleton<IOrderData, OrderData>();
 
-                services.AddCors(options =>
-                {
-                    options.AddPolicy("AllowOrigins", builder => builder.AllowAnyOrigin()
-                                                                        .AllowAnyHeader()
-                                                                        .AllowAnyMethod());
-                });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,9 +56,9 @@ namespace API
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
             app.UseCors("AllowOrigins");
+
+            app.UseRouting();           
 
             app.UseAuthorization();
 

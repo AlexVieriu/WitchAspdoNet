@@ -32,3 +32,55 @@ https://www.c-sharpcorner.com/article/routing-in-blazor/
 
 
 84. Creating Data 
+
+UI:
+-> create e <EditForm>
+    -> <select>, <option>
+    -> <InputNumber>
+    -> <InputText>
+    -> <input type="submit"/>
+
+
+@code:
+-> OnParametersSetAsync()
+    -> send a HttpResponse with the url to get the foodList
+    -> get the foodList from the httpResponse.content and convert it to List<FoodModel>
+    -> throw and error if something is not right
+
+-> FoodItemChange(ChangeEventArgs e)
+    -> check if the value from the foodList IsNullOrWhiteSpace
+    -> take the order.OrderId everytime we select one meal from the list
+
+-> HandleValidSubmit()
+    -> calculat the order.Total
+    -> create the order(Http.PostAsJsonAsync) passing the endpoint and the object order
+
+
+85. Reading Data
+
+UI:
+-> page: "/Food/List"
+-> check if listOfFoods.Count <= 0 
+-> dsiplay a table with the List of foods: Title, Description, Price
+
+
+@code:
+-> create  a list of FoodModel objects
+-> create a string to store the error if the Json content can't be Deserialized
+-> OnInitializedAsync();
+    -> get the foodList (HttpResponse)
+    -> check the status of the Httpresponse -> if it is ok(), Deserialize the Json into a FoodModel object
+                                            -> if not, return a HttpResponse error
+
+
+86. Update Data 
+
+->create a <EditForm>:  <label>, <inputText>, <ValidationMessage>
+                        <input type="submit">
+
+-> HandleValidSubmit()
+    -> try      { Http.PutAsJsonAsync }
+    -> catch    { error }
+            
+
+

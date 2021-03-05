@@ -1,0 +1,106 @@
+﻿@page "/Order/Display/{Id:int}"
+
+@inject HttpClient Http
+@inject NavigationManager navManager
+
+@if (string.IsNullOrWhiteSpace(errorString) == false)
+{
+    <h4>System Error</h4>
+    <p>@errorString</p>
+}
+
+else if (order is null)
+{
+    <h4>Loading...</h4>
+}
+
+else
+{
+    //ordername, orderdate, total, ItemPurchased, Quantity
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <td>Order Name</td>
+                <td>@order.OrderName</td>
+            </tr>
+
+            <tr>
+                <td>Order Date</td>
+                <td>@order.OrderDate</td>
+            </tr>
+
+            <tr>
+                <td>Order Total</td>
+                <td>@order.Total.ToString("c")</td>
+            </tr>
+
+            <tr>
+                <td>Quantity</td>
+                <td>@order.Quantity</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <br />
+
+    <EditForm Model="@updateModel" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label> Name of the Order</label>
+            <InputText @bind-Value="updateModel.OrderName" class="form-control" />
+            <ValidationMessage For="@(() => updateModel.OrderName)" class="text-danger"/>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Update Order Name" class="btn btn-primary"/>
+        </div>
+
+    </EditForm>
+}
+
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    private OrderModel order = new();
+    private OrderUpdateModel updateModel = new();
+    private string errorString;
+
+    protected override async Task OnInitializedAsync()
+    {
+        HttpResponseMessage response = await Http.GetAsync($"https://localhost:44389/api/order/{Id}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            order = await response.Content.ReadFromJsonAsync<OrderModel>();
+            updateModel.Id = order.Id;
+            updateModel.OrderName = order.OrderName;
+        }
+        else
+        {
+            errorString = response.ReasonPhrase;
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            HttpResponseMessage response =
+                await Http.PutAsJsonAsync("https://localhost:44389/api/order", updateModel);
+
+            order.OrderName = updateModel.OrderName;
+
+        }
+        catch (Exception e)
+        {
+            errorString = e.Message;
+        }
+
+    }
+}
