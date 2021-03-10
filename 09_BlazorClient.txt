@@ -83,4 +83,14 @@ UI:
     -> catch    { error }
             
 
+87. Deleting Data
+
+UI:
+-> if(ConfirmDelete = true)
+    -> button 1 : @onclick = HandleDeleteRecord
+    -> button 2 : confirmDelete = false;
+-> Else
+    -> button 3 : confirmDelete = true;
+
+
 

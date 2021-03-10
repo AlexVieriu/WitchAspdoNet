@@ -34,13 +34,6 @@ namespace DataLibrary.Data
             return p.Get<int>("Id");
         }
 
-        public Task<int> UpdateOrderName(int orderId, string orderName)
-        {
-            return _db.SaveData("dbo.spOrders_UpdateName",
-                                new { Id = orderId, orderName = orderName },
-                                _connectionString.SqlConnectionName);
-        }
-
         public Task<int> DeleteOrder(int orderId)
         {
             return _db.SaveData("dbo.spOrders_Delete",
@@ -56,6 +49,13 @@ namespace DataLibrary.Data
                                                                   _connectionString.SqlConnectionName);
 
             return records.FirstOrDefault();
+        }
+
+        public Task<int> UpdateOrderName(int orderId, string orderName)
+        {
+            return _db.SaveData("dbo.spOrders_UpdateName",
+                                new { Id = orderId, orderName = orderName },
+                                _connectionString.SqlConnectionName);
         }
     }
 }

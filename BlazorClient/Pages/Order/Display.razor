@@ -40,6 +40,27 @@ else
                 <td>@order.Quantity</td>
             </tr>
 
+            <tr>
+                <td colspan="2">
+                    @if (confirmDelete)
+                    {
+                        <button class="btn btn-outline-danger" @onclick="HandleDeleteRecord">
+                            Confirm Delete
+                        </button>
+                        <button class="btn btn-secondary" @onclick="(() => confirmDelete = false)">
+                            Cancel
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-danger" @onclick="(() => confirmDelete = true)">
+                            Delete Order
+                        </button>
+                    }
+                </td>
+
+            </tr>
+
         </tbody>
     </table>
 
@@ -52,11 +73,11 @@ else
         <div class="form-group">
             <label> Name of the Order</label>
             <InputText @bind-Value="updateModel.OrderName" class="form-control" />
-            <ValidationMessage For="@(() => updateModel.OrderName)" class="text-danger"/>
+            <ValidationMessage For="@(() => updateModel.OrderName)" class="text-danger" />
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Update Order Name" class="btn btn-primary"/>
+            <input type="submit" value="Update Order Name" class="btn btn-primary" />
         </div>
 
     </EditForm>
@@ -70,6 +91,7 @@ else
     private OrderModel order = new();
     private OrderUpdateModel updateModel = new();
     private string errorString;
+    private bool confirmDelete = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -101,6 +123,20 @@ else
         {
             errorString = e.Message;
         }
+    }
 
+
+    private async Task HandleDeleteRecord()
+    {
+        HttpResponseMessage response = await Http.DeleteAsync($"https://localhost:44389/api/order/{order.Id}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            navManager.NavigateTo("/food/list");
+        }
+        else
+        {
+            errorString = response.ReasonPhrase;
+        }
     }
 }

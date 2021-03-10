@@ -26,13 +26,13 @@
     <div class="form-group">
         <label>Quatity</label>
         <InputNumber @bind-Value="order.Quantity" class="form-control" />
-        <ValidationMessage For="@(()=> order.Quantity)" class="text-danger" />
+        <ValidationMessage For="@(()=> order.Quantity)" />
     </div>
 
     <div class="form-group">
         <label>Name for the Order</label>
         <InputText @bind-Value="order.OrderName" class="form-control" />
-        <ValidationMessage For="@(()=> order.OrderName)" class="text-danger" />
+        <ValidationMessage For="@(()=> order.OrderName)" />
     </div>
 
     <div class="form-group">
